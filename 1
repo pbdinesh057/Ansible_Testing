@@ -1,0 +1,11 @@
+---
+- name: Deleting the batman and heman users
+  hosts: app
+  tasks:
+    - name: Taking the required users into vars
+      shell: ls /home/
+      register: usersdel
+
+    - name: print the reg
+      debug:
+        var: "{{ usersdel.stdout_lines[2] }}"

@@ -1,0 +1,15 @@
+---
+- name: create user
+  hosts: all
+  tasks:
+  - name: create user Heman
+    user: name=Heman
+  - name: make Heman root user
+    shell: usermod -aG root Heman
+  - name: copy some into Home dir of Heman
+    become: yes
+    become_user: root
+    copy:
+      src: /home/ansible/dinesh/text.txt
+      dest: /home/Heman
+...

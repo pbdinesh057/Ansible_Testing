@@ -1,0 +1,8 @@
+- name: Test register
+  hosts: app
+  tasks:
+    - shell: cat /etc/passwd
+      register: passwd_contents
+    - debug:
+       msg: "passwd file contains a file ansible {{ passwd_contents }}"
+      when: passwd_contents.stdout.find('ansible') != -1

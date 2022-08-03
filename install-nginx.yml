@@ -1,0 +1,9 @@
+- name: Install Nginx 
+  hosts: app
+  tasks:
+    - package:
+        name: nginx
+        state: absent
+      when:
+        - ansible_memfree_mb < 600
+

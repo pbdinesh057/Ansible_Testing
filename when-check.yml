@@ -1,0 +1,14 @@
+---
+- name: Ansible Variable Example Playbook
+  hosts: app
+  gather_facts: true
+  tasks:
+
+    # Print the Dictionary
+    - debug:
+        msg: "{{ansible_mounts}}"
+      register: block
+
+      debug:
+        var: block
+      when: ansible_machine_id == "600d72cdf171437c925b369649d1dc85"
