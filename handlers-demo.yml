@@ -1,0 +1,24 @@
+---
+- name: demo for Handlers
+  hosts: app
+  tasks:
+    - name: install nginx and httpd
+      yum:
+        name: nginx
+        state: latest
+      notify:
+        - start_services
+    - name: check status of nginx
+      shell:
+        cmd: systemctl status nginx
+      register: nginx_status
+    - set_fact:
+        nginx_status: "{{ nginx_status.stdout }}"
+    - debug:
+        var: nginx_status.stdout
+  handlers:
+    - name: start_services
+      service: 
+          name: nginx
+          state: started
+...

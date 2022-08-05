@@ -1,0 +1,10 @@
+- name: find the files in / ending with conf or whatever
+  hosts: app
+  tasks:
+    - name: find command
+      shell: 
+        cmd: find {{ DIR }} -name {{ NAME }} | head -{{ LINES }}
+      register: output
+
+    - debug: var=output.stdout_lines
+

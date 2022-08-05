@@ -1,0 +1,11 @@
+- name: creating the file
+  hosts: app
+  force_handlers: True
+  tasks:
+    - name: creating the touch file called handlers
+      file:
+        name: handlerfile
+        state: touch
+        path: /home/ansible/
+        mode: 755
+        content: "DONT COME UP!! I WILL HANDLE THEM!!"

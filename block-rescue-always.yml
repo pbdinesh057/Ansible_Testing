@@ -1,0 +1,35 @@
+---
+- name: Blocks demo
+  hosts: app
+  tasks:
+    - name: creating a file and copying text from other file 
+      block:
+        - name: create a folder
+          file:
+            name: Blocks-Test
+            state: touch
+            path: /home/ansible
+            mode: 755
+        - name: copying a text from copy file
+          shell:  
+            cmd: 'cat copy >> Blocks-Test'
+      rescue: 
+        - name: create a copy and insert some data if it is not There
+          shell: 
+            cmd: echo "TESTING THE BLOCK YESSSSSSSSSLSMKVNS" >> copy
+      always:
+        - name: Afterall we need copy contents in Block test file
+          shell:
+            cmd: cat copy >> Blocks-Test
+
+
+- name: play for checking the contents og block test
+  hosts: app
+  tasks:
+    - name: debugging the block test file"
+      shell: 
+        cmd: cat /home/ansible/Blocks-Test
+      register: blockout
+    - debug:
+        var: blockout.stdout
+...

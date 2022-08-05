@@ -1,0 +1,16 @@
+- name: configure vsftpd using a temptlate
+  hosts: app
+  vars: 
+    anonymous_enable: yes
+    local_enable: yes
+    write_enable: yes
+    anon_upload_enable: yes
+  tasks:
+    - name: install vsftpd
+      yum:
+        name: vsftpd
+        state: latest
+    - name: use temptlate to use FTP configure
+      template:
+        src: vsftpd.j2
+        dest: /etc/vsftpd/vsftpd.conf

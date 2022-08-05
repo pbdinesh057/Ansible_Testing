@@ -1,0 +1,23 @@
+---
+- name: Blocks demo
+  hosts: app
+  tasks:
+    - name: creating a folder and clonig a git repo in it 
+      block:
+        - name: create a folder
+          file:
+            name: Blocks-Ansible
+            state: directory
+            path: /home/ansible
+            mode: 755
+        - name: create a files in  folder
+          file:
+            name: testfile
+            state: touch
+            path: /home/ansible/
+            mode: 777
+        - name: inserting some data inside the testfile
+          shell: 
+            cmd: echo "Hi There striaght into test file" > /home/ansible/testfile
+      when: ansible_distribution == "RedHat"
+...
